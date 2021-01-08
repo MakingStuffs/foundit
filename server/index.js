@@ -1,27 +1,17 @@
-'use strict'
-const express = require('express')
+const app = require('./app')
+const https = require('https')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+const fs = require('fs')
 
-// Create the express app
-const app = express()
+const server = https.createServer(
+  {
+    key: fs.readFileSync(config.SSL_KEY),
+    cert: fs.readFileSync(config.SSL_CERT),
+  },
+  app
+)
 
-// Routes and middleware
-// app.use(/* ... */)
-// app.get(/* ... */)
-
-// Error handlers
-app.use(function fourOhFourHandler (req, res) {
-  res.status(404).send()
-})
-app.use(function fiveHundredHandler (err, req, res, next) {
-  console.error(err)
-  res.status(500).send()
-})
-
-// Start server
-app.listen(1234, function (err) {
-  if (err) {
-    return console.error(err)
-  }
-
-  console.log('Started at http://localhost:1234')
+server.listen(config.PORT, () => {
+  logger.info(`Connected to server on port ${config.PORT}`)
 })
