@@ -48,7 +48,6 @@ const Form = ({ toggleVisibility }) => {
             body: JSON.stringify(formData),
           })
           const data = await response.json()
-          console.log(data.status)
           return setTimeout(() => {
             setLoading(false)
             return data.status === 200
