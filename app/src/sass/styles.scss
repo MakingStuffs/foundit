@@ -312,6 +312,38 @@ button {
   }
 }
 
+footer {
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  color: white;
+  margin: 2rem auto;
+
+  p {
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+a {
+  color: inherit;
+  transition: 0.3s ease;
+  text-decoration: none;
+  font-weight: bolder;
+
+  &:visited {
+    color: inherit;
+  }
+  &:hover {
+    background-color: $darkGreen;
+    color: $offWhite;
+  }
+}
+
+.grecaptcha-badge {
+  display: none !important;
+}
+
 @keyframes rotate {
   from {
     transform: translate(-50%, -50%) rotate(0deg);

@@ -19,6 +19,21 @@ const HomeContent = () => (
       Please note that I will only contact you if you correctly identify the
       Apple AirPods which I found.
     </p>
+    <p>
+      This website does not store your data and I will only be notified if you
+      correctly identify the headphones.
+    </p>
+    <p>
+      You can verify the website&apos;s source code in this{' '}
+      <a
+        href="https://github.com/MakingStuffs/foundit"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Found It's GitHub repository"
+      >
+        GitHub repository
+      </a>
+    </p>
   </div>
 )
 

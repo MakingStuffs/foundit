@@ -1,18 +1,36 @@
 import React from 'react'
 
 const MainFooter = () => (
-  <footer
-    style={{
-      maxWidth: 500,
-      width: '90%',
-      textAlign: 'center',
-      color: 'white',
-      margin: '2rem auto',
-      fontSize: '1.2rem',
-    }}
-  >
-    Your information is not stored on any database or shared with any third
-    parties other than Google&apos;s reCaptcha bot prevention.
+  <footer>
+    <p>
+      Your information is not stored or shared with anyone. This website uses
+      Google reCaptcha 3, view their{' '}
+      <a
+        href="https://policies.google.com/terms?hl=en"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Google reCaptcha terms and privacy statement"
+      >
+        terms
+      </a>{' '}
+      and{' '}
+      <a
+        href="https://policies.google.com/privacy?hl=en"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Google reCaptcha terms and privacy statement"
+      >
+        privacy
+      </a>{' '}
+      <a
+        href="https://github.com/MakingStuffs/foundit"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Found It's GitHub repository"
+      >
+        View source code
+      </a>
+    </p>
   </footer>
 )
 
