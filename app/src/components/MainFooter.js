@@ -12,7 +12,7 @@ const MainFooter = () => (
     }}
   >
     Your information is not stored on any database or shared with any third
-    parties other than Google's reCaptcha bot prevention.
+    parties other than Google&apos;s reCaptcha bot prevention.
   </footer>
 )
 

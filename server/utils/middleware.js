@@ -24,7 +24,7 @@ const validateRecaptcha = async (req, res, next) => {
     body: `secret=${config.RECAPTCHA_SECRET}&response=${req.body.token}`,
   })
   const data = await response.json()
-  console.log(data)
+  
   if (!data.success) {
     return res.status(401).json({
       status: 401,

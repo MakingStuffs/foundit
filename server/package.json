@@ -9,7 +9,7 @@
   "scripts": {
     "start": "pm2 start index.js --name 'foundit' --exp-backoff-restart-delay=100",
     "start:dev": "nodemon index.js --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:test": "NODE_ENV=test nodemon index.js --watch"
   },
   "dependencies": {
     "compression": "^1.7.4",

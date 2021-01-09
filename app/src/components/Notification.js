@@ -2,7 +2,7 @@ import React from 'react'
 
 const Notification = ({ closeHandler, errorMessage, successMessage }) => {
   const hasMessage = errorMessage || successMessage
-  const getMessageParagraphs = (msg) => msg.split('.').map((p) => <p>{p}</p>)
+  const getMessageParagraphs = (msg) => msg.split('.').map((p, i) => <p key={i + Math.random()}>{p}</p>)
   return (
     hasMessage && (
       <>

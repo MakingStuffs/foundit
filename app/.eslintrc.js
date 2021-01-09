@@ -7,8 +7,12 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:prettier/recommended',
+    'plugin:cypress/recommended',
   ],
+  globals: {
+    cy: true,
+    module: true,
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

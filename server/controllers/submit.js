@@ -32,6 +32,11 @@ submitRouter.post(
 
     const errors = validationResult(req)
 
+
+    if ( process.env.NODE_ENV === 'test' ) {
+      console.log(errors)
+    }
+
     if (!errors.isEmpty())
       return res.status(400).json({
         status: 400,
@@ -53,7 +58,7 @@ submitRouter.post(
       })
 
     if (hasCase) {
-      const regex = /^[a-z 0-9]+$/gi
+      const regex = /^[a-z \'\"\.\,\-\_\)\(\/0-9]+$/gi
       const materialTest = regex.test(caseMaterial)
       regex.lastIndex = 0
       const colourTest = regex.test(caseColour)
@@ -75,8 +80,8 @@ submitRouter.post(
     }
 
     if (caseHasAccessories) {
-      const regex = /^[\w \d]*$/gi
-      if (!regex.test(caseAccessories)) {
+      const regex = /^[a-z \'\"\.\,\-\_\)\(\/0-9]+$/gi
+        if (!regex.test(caseAccessories)) {
         return res.status(400).json({
           status: 400,
           message:

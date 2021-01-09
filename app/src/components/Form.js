@@ -48,11 +48,17 @@ const Form = ({ toggleVisibility }) => {
             body: JSON.stringify(formData),
           })
           const data = await response.json()
+          console.log(data.status)
           return setTimeout(() => {
             setLoading(false)
             return data.status === 200
               ? setNotification(data.message)
               : setErrorMessage(data.message)
+          }, 3000)
+        }).catch(() => {
+          setTimeout(() => {
+            setErrorMessage('There has been a problem with the server. Please try again later.')
+            setLoading(false)
           }, 3000)
         })
     )
@@ -71,11 +77,11 @@ const Form = ({ toggleVisibility }) => {
   const validateField = (value, type = null) => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (value === '') {
-      setErrorMessage(`This field cannot be empty`)
+      setErrorMessage('This field cannot be empty')
       return false
     }
     if (value.length < 3) {
-      setErrorMessage(`This field must be at least three characters`)
+      setErrorMessage('This field must be at least three characters')
       return false
     }
     if (type === 'email') {

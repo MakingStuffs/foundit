@@ -36,15 +36,15 @@ body {
 .notification-box,
 .error-box,
 .container {
-  padding: 2rem 1rem;
+  padding: 2rem;
   text-align: center;
-  margin: auto 2rem;
+  margin: auto;
   border-radius: $borderRadius;
   max-width: 500px;
   background-color: $offWhite;
   line-height: 1.5;
   box-shadow: $shadow;
-  width: calc(100vw - 4rem);
+  width: calc(100vw - 6rem);
   position: relative;
   max-height: calc(80% - 4rem);
   overflow: hidden;
