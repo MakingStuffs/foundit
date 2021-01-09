@@ -344,13 +344,16 @@ const Form = ({ toggleVisibility }) => {
         data-size="invisible"
       ></div>
       <form className="container" onSubmit={submitHandler}>
-        <img
-          src="/foundit-logo.png"
-          width="50px"
-          height="50px"
-          alt="Found It logo"
-          style={{ borderRadius: '50%' }}
-        />
+        <div className="header">
+          <img
+            src="/foundit-logo.png"
+            width="50px"
+            height="50px"
+            alt="Found It logo"
+            style={{ borderRadius: '50%' }}
+          />
+          <h1>Found It</h1>
+        </div>
         {loading !== false && (
           <>
             <span className="loader"></span>
@@ -361,20 +364,22 @@ const Form = ({ toggleVisibility }) => {
           type="button"
           onClick={() => toggleVisibility(false)}
         ></button>
-        {questions[current]}
-        {current !== 0 && (
-          <button type="button" onClick={backButtonHandler}>
-            Prev
-          </button>
-        )}
-        {current !== questions.length - 1 && (
-          <button type="button" onClick={nextButtonHandler}>
-            Next
-          </button>
-        )}
-        {current === questions.length - 1 && (
-          <button type="submit">Submit</button>
-        )}
+        <div className="content">{questions[current]}</div>
+        <div className="footer">
+          {current !== 0 && (
+            <button type="button" onClick={backButtonHandler}>
+              Prev
+            </button>
+          )}
+          {current !== questions.length - 1 && (
+            <button type="button" onClick={nextButtonHandler}>
+              Next
+            </button>
+          )}
+          {current === questions.length - 1 && (
+            <button type="submit">Submit</button>
+          )}
+        </div>
       </form>
     </>
   )
