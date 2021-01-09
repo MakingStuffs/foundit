@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import FormFooter from './FormFooter'
+import Notification from './Notification'
+import FoundItHeader from './FoundItHeader'
+import Loader from './Loader '
+import ReCaptcha from './ReCaptcha'
+import QuestionList from './QuestionsList'
 
 const Form = ({ toggleVisibility }) => {
   const [current, setCurrent] = useState(0)
+  const [totalQuestions, setTotalQuestions] = useState(0)
   const [loading, setLoading] = useState(false)
   const [notification, setNotification] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -54,7 +61,7 @@ const Form = ({ toggleVisibility }) => {
   const submitHandler = (event) => {
     event.preventDefault()
 
-    if (current !== questions.length - 1) {
+    if (current !== totalQuestions) {
       return setCurrent(current + 1)
     }
     setLoading(true)
@@ -116,6 +123,15 @@ const Form = ({ toggleVisibility }) => {
     setCurrent(current - 1)
   }
 
+  const notificationCallback = () => {
+    if (errorMessage !== '') {
+      setErrorMessage('')
+    } else {
+      setNotification('')
+      toggleVisibility(false)
+    }
+  }
+
   useEffect(() => {
     const script = document.createElement('script')
     script.src =
@@ -123,275 +139,34 @@ const Form = ({ toggleVisibility }) => {
     document.body.appendChild(script)
   }, [])
 
-  const questions = [
-    <div className="form-input">
-      <label>What is the device name?</label>
-      <span className="description">
-        The device name is the name which appears when you pair it. For example:
-        Paul's AirPods
-      </span>
-      <input
-        name="deviceName"
-        value={formData.deviceName}
-        type="text"
-        onChange={changeHandler}
-        required={true}
-        inputMode="text"
-      />
-    </div>,
-    <div className="form-switch">
-      <p>Are they in a case?</p>
-      <span className="description">
-        This does not mean the charging box which comes with the headphones.
-      </span>
-      <label className="switch">
-        <input
-          name="hasCase"
-          checked={formData.hasCase}
-          type="checkbox"
-          onChange={changeHandler}
-        />
-        <span className="slider"></span>
-        <span className="status">{formData.hasCase ? 'Yes' : 'No'}</span>
-      </label>
-    </div>,
-    <div className="form-input">
-      <label>What colour is the case?</label>
-      <span className="description">
-        Again, this is not referring to the charging box which comes with the
-        headphones.
-      </span>
-      <input
-        name="caseColour"
-        value={formData.caseColour}
-        type="text"
-        inputMode="text"
-        onChange={changeHandler}
-      />
-    </div>,
-    <div className="form-input">
-      <label>What Material is the Case?</label>
-      <span className="description">
-        A one word answer such as 'plastic', 'rubber' or 'wood' will do.
-      </span>
-      <input
-        name="caseMaterial"
-        value={formData.caseMaterial}
-        type="text"
-        onChange={changeHandler}
-        inputMode="text"
-      />
-    </div>,
-    <div className="form-switch">
-      <p>Does the Case Have Accessories?</p>
-      <span className="description">
-        An accessory could be something like a light, clip or a sticker.
-      </span>
-      <label className="switch">
-        <input
-          name="caseHasAccessories"
-          checked={formData.caseHasAccessories}
-          type="checkbox"
-          onChange={changeHandler}
-        />
-        <span className="slider"></span>
-        <span className="status">
-          {formData.caseHasAccessories ? 'Yes' : 'No'}
-        </span>
-      </label>
-    </div>,
-    <div className="form-input">
-      <label>What is it?</label>
-      <span className="description">
-        Describe the accessory attached to the case.
-      </span>
-      <input
-        name="caseAccessories"
-        value={formData.caseAccessories}
-        type="text"
-        onChange={changeHandler}
-        inputMode="text"
-      />
-    </div>,
-    <div className="form-input">
-      <label>What is your name?</label>
-      <span className="description">
-        If you would prefer not to say just say 'prefer not to say'
-      </span>
-      <input
-        name="name"
-        value={formData.name}
-        type="text"
-        onChange={changeHandler}
-        inputMode="text"
-        required={true}
-      />
-    </div>,
-    <div className="form-input">
-      <label>What is your email address?</label>
-      <span className="description">
-        This will only be used to contact you if you correctly identify the
-        AirPods. No information is stored within a database.
-      </span>
-      <input
-        name="email"
-        value={formData.email}
-        type="text"
-        onChange={changeHandler}
-        inputMode="email"
-        required={true}
-      />
-    </div>,
-    <div className="form-input">
-      <label>What is your phone number?</label>
-      <span className="description">
-        Again, this will only be used to contact you in the case you correctly
-        identify the headphones and is not stored in a database.
-      </span>
-      <input
-        name="phone"
-        value={formData.phone}
-        type="number"
-        onChange={changeHandler}
-        inputMode="tel"
-        required={true}
-        minLength="11"
-      />
-    </div>,
-    <div className="confirmation-container">
-      <h2>Your Answers</h2>
-      <p className="description">
-        Please confirm you submitted the correct information or go back and
-        alter your input.
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Name: </span>
-        {formData.name}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Phone: </span>
-        {formData.phone}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Email: </span>
-        {formData.email}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Device Name: </span>
-        {formData.deviceName}
-      </p>
-      <p>
-        <span style={{ fontWeight: 'bold' }}>Description: </span>
-        {formData.hasCase
-          ? `Has a ${formData.caseColour} case which is made of ${
-              formData.caseMaterial
-            }${
-              formData.caseHasAccessories
-                ? ` and has a ${formData.caseAccessories}`
-                : '.'
-            }`
-          : 'No case or accessories.'}
-      </p>
-    </div>,
-  ]
-
   return (
     <>
-      {notification !== '' && (
-        <>
-          <div className="overlay"></div>
-          <div className="notification-box">
-            <div className="header">
-              <img
-                src="/foundit-logo.png"
-                width="50px"
-                height="50px"
-                alt="Found It logo"
-                style={{ borderRadius: '50%' }}
-              />
-              <p>Success</p>
-            </div>
-            <div className="content">
-              <p>{notification}</p>
-            </div>
-            <div className="footer">
-              <button
-                onClick={() => {
-                  setNotification('')
-                  toggleVisibility(false)
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </>
-      )}
-      {errorMessage !== '' && (
-        <>
-          <div className="overlay"></div>
-          <div className="error-box">
-            <div className="header">
-              <img
-                src="/foundit-logo.png"
-                width="50px"
-                height="50px"
-                alt="Found It logo"
-                style={{ borderRadius: '50%' }}
-              />
-              <p>Error</p>
-            </div>
-            <div className="content">
-              <p>{errorMessage}</p>
-            </div>
-            <div className="footer">
-              <button onClick={() => setErrorMessage('')}>Close</button>
-            </div>
-          </div>
-        </>
-      )}
-      <div
-        className="g-recaptcha"
-        data-sitekey="6LdTzCUaAAAAABJFQhrEhUVV3CAr2s1DvrH9M3gg"
-        data-size="invisible"
-      ></div>
+      <Notification
+        errorMessage={errorMessage}
+        successMessage={notification}
+        closeHandler={notificationCallback}
+      />
+      <ReCaptcha />
       <form className="container" onSubmit={submitHandler}>
-        <div className="header">
-          <img
-            src="/foundit-logo.png"
-            width="50px"
-            height="50px"
-            alt="Found It logo"
-            style={{ borderRadius: '50%' }}
-          />
-          <h1>Found It</h1>
-        </div>
-        {loading !== false && (
-          <>
-            <span className="loader"></span>
-          </>
-        )}
+        <FoundItHeader />
+        <Loader loading={loading} />
         <button
           className="close-button"
           type="button"
           onClick={() => toggleVisibility(false)}
         ></button>
-        <div className="content">{questions[current]}</div>
-        <div className="footer">
-          {current !== 0 && (
-            <button type="button" onClick={backButtonHandler}>
-              Prev
-            </button>
-          )}
-          {current !== questions.length - 1 && (
-            <button type="button" onClick={nextButtonHandler}>
-              Next
-            </button>
-          )}
-          {current === questions.length - 1 && (
-            <button type="submit">Submit</button>
-          )}
-        </div>
+        <QuestionList
+          current={current}
+          formData={formData}
+          changeHandler={changeHandler}
+          setTotal={setTotalQuestions}
+        />
+        <FormFooter
+          backHandler={backButtonHandler}
+          nextHandler={nextButtonHandler}
+          currentQuestion={current}
+          totalQuestions={totalQuestions}
+        />
       </form>
     </>
   )
