@@ -32,7 +32,6 @@ submitRouter.post(
 
     const errors = validationResult(req)
 
-
     if ( process.env.NODE_ENV === 'test' ) {
       console.log(errors)
     }
