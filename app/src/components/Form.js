@@ -301,23 +301,29 @@ const Form = ({ toggleVisibility }) => {
         <>
           <div className="overlay"></div>
           <div className="notification-box">
-            <img
-              src="/foundit-logo.png"
-              width="50px"
-              height="50px"
-              alt="Found It logo"
-              style={{ borderRadius: '50%' }}
-            />
-            <h3>Success</h3>
-            <p>{notification}</p>
-            <button
-              onClick={() => {
-                setNotification('')
-                toggleVisibility(false)
-              }}
-            >
-              Close
-            </button>
+            <div className="header">
+              <img
+                src="/foundit-logo.png"
+                width="50px"
+                height="50px"
+                alt="Found It logo"
+                style={{ borderRadius: '50%' }}
+              />
+              <p>Success</p>
+            </div>
+            <div className="content">
+              <p>{notification}</p>
+            </div>
+            <div className="footer">
+              <button
+                onClick={() => {
+                  setNotification('')
+                  toggleVisibility(false)
+                }}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </>
       )}
@@ -325,16 +331,22 @@ const Form = ({ toggleVisibility }) => {
         <>
           <div className="overlay"></div>
           <div className="error-box">
-            <img
-              src="/foundit-logo.png"
-              width="50px"
-              height="50px"
-              alt="Found It logo"
-              style={{ borderRadius: '50%' }}
-            />
-            <h3>Error</h3>
-            <p>{errorMessage}</p>
-            <button onClick={() => setErrorMessage('')}>Close</button>
+            <div className="header">
+              <img
+                src="/foundit-logo.png"
+                width="50px"
+                height="50px"
+                alt="Found It logo"
+                style={{ borderRadius: '50%' }}
+              />
+              <p>Error</p>
+            </div>
+            <div className="content">
+              <p>{errorMessage}</p>
+            </div>
+            <div className="footer">
+              <button onClick={() => setErrorMessage('')}>Close</button>
+            </div>
           </div>
         </>
       )}
