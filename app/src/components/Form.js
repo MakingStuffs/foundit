@@ -22,7 +22,6 @@ const Form = ({ toggleVisibility }) => {
     const target = event.target
     const name = target.name
     const value = target.type === 'checkbox' ? target.checked : target.value
-
     setFormData({ ...formData, [name]: value })
   }
 
@@ -54,13 +53,11 @@ const Form = ({ toggleVisibility }) => {
 
   const submitHandler = (event) => {
     event.preventDefault()
-    setLoading(true)
+
     if (current !== questions.length - 1) {
-      return setTimeout(() => {
-        setLoading(false)
-        setCurrent(current + 1)
-      }, 3000)
+      return setCurrent(current + 1)
     }
+    setLoading(true)
     return sendForm()
   }
 
@@ -128,7 +125,11 @@ const Form = ({ toggleVisibility }) => {
 
   const questions = [
     <div className="form-input">
-      <label>What is the Device Name?</label>
+      <label>What is the device name?</label>
+      <span className="description">
+        The device name is the name which appears when you pair it. For example:
+        Paul's AirPods
+      </span>
       <input
         name="deviceName"
         value={formData.deviceName}
@@ -138,7 +139,10 @@ const Form = ({ toggleVisibility }) => {
       />
     </div>,
     <div className="form-switch">
-      <p>Does it Have a Case?</p>
+      <p>Are they in a case?</p>
+      <span className="description">
+        This does not mean the charging box which comes with the headphones.
+      </span>
       <label className="switch">
         <input
           name="hasCase"
@@ -151,7 +155,11 @@ const Form = ({ toggleVisibility }) => {
       </label>
     </div>,
     <div className="form-input">
-      <label>What Colour is the Case?</label>
+      <label>What colour is the case?</label>
+      <span className="description">
+        Again, this is not referring to the charging box which comes with the
+        headphones.
+      </span>
       <input
         name="caseColour"
         value={formData.caseColour}
@@ -161,6 +169,9 @@ const Form = ({ toggleVisibility }) => {
     </div>,
     <div className="form-input">
       <label>What Material is the Case?</label>
+      <span className="description">
+        A one word answer such as 'plastic', 'rubber' or 'wood' will do.
+      </span>
       <input
         name="caseMaterial"
         value={formData.caseMaterial}
@@ -169,7 +180,10 @@ const Form = ({ toggleVisibility }) => {
       />
     </div>,
     <div className="form-switch">
-      <p>Does the Case Have a Defining Feature?</p>
+      <p>Does the Case Have Accessories?</p>
+      <span className="description">
+        An accessory could be something like a light, clip or a sticker.
+      </span>
       <label className="switch">
         <input
           name="caseHasAccessories"
@@ -185,6 +199,9 @@ const Form = ({ toggleVisibility }) => {
     </div>,
     <div className="form-input">
       <label>What is it?</label>
+      <span className="description">
+        Describe the accessory attached to the case.
+      </span>
       <input
         name="caseAccessories"
         value={formData.caseAccessories}
@@ -193,7 +210,10 @@ const Form = ({ toggleVisibility }) => {
       />
     </div>,
     <div className="form-input">
-      <label>What is Your Name?</label>
+      <label>What is your name?</label>
+      <span className="description">
+        If you would prefer not to say just say 'prefer not to say'
+      </span>
       <input
         name="name"
         value={formData.name}
@@ -202,7 +222,11 @@ const Form = ({ toggleVisibility }) => {
       />
     </div>,
     <div className="form-input">
-      <label>What is Your Email Address?</label>
+      <label>What is your email address?</label>
+      <span className="description">
+        This will only be used to contact you if you correctly identify the
+        AirPods. No information is stored within a database.
+      </span>
       <input
         name="email"
         value={formData.email}
@@ -211,7 +235,11 @@ const Form = ({ toggleVisibility }) => {
       />
     </div>,
     <div className="form-input">
-      <label>What is Your Phone Number?</label>
+      <label>What is your phone number?</label>
+      <span className="description">
+        Again, this will only be used to contact you in the case you correctly
+        identify the headphones and is not stored in a database.
+      </span>
       <input
         name="phone"
         value={formData.phone}
@@ -221,6 +249,10 @@ const Form = ({ toggleVisibility }) => {
     </div>,
     <div className="confirmation-container">
       <h2>Your Answers</h2>
+      <p className="description">
+        Please confirm you submitted the correct information or go back and
+        alter your input.
+      </p>
       <p>
         <span style={{ fontWeight: 'bold' }}>Name: </span>
         {formData.name}
@@ -294,6 +326,7 @@ const Form = ({ toggleVisibility }) => {
         )}
         <button
           className="close-button"
+          type="button"
           onClick={() => toggleVisibility(false)}
         ></button>
         {questions[current]}

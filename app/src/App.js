@@ -3,7 +3,7 @@ import Form from './components/Form'
 import Container from './components/Container'
 
 function App() {
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(true)
 
   return (
     <div className="App">
