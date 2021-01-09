@@ -136,6 +136,7 @@ const Form = ({ toggleVisibility }) => {
         type="text"
         onChange={changeHandler}
         required={true}
+        inputMode="text"
       />
     </div>,
     <div className="form-switch">
@@ -164,6 +165,7 @@ const Form = ({ toggleVisibility }) => {
         name="caseColour"
         value={formData.caseColour}
         type="text"
+        inputMode="text"
         onChange={changeHandler}
       />
     </div>,
@@ -175,8 +177,9 @@ const Form = ({ toggleVisibility }) => {
       <input
         name="caseMaterial"
         value={formData.caseMaterial}
-        type="test"
+        type="text"
         onChange={changeHandler}
+        inputMode="text"
       />
     </div>,
     <div className="form-switch">
@@ -207,6 +210,7 @@ const Form = ({ toggleVisibility }) => {
         value={formData.caseAccessories}
         type="text"
         onChange={changeHandler}
+        inputMode="text"
       />
     </div>,
     <div className="form-input">
@@ -219,6 +223,8 @@ const Form = ({ toggleVisibility }) => {
         value={formData.name}
         type="text"
         onChange={changeHandler}
+        inputMode="text"
+        required={true}
       />
     </div>,
     <div className="form-input">
@@ -232,6 +238,8 @@ const Form = ({ toggleVisibility }) => {
         value={formData.email}
         type="text"
         onChange={changeHandler}
+        inputMode="email"
+        required={true}
       />
     </div>,
     <div className="form-input">
@@ -245,6 +253,9 @@ const Form = ({ toggleVisibility }) => {
         value={formData.phone}
         type="number"
         onChange={changeHandler}
+        inputMode="tel"
+        required={true}
+        minLength="11"
       />
     </div>,
     <div className="confirmation-container">
@@ -290,6 +301,13 @@ const Form = ({ toggleVisibility }) => {
         <>
           <div className="overlay"></div>
           <div className="notification-box">
+            <img
+              src="/foundit-logo.png"
+              width="50px"
+              height="50px"
+              alt="Found It logo"
+              style={{ borderRadius: '50%' }}
+            />
             <h3>Success</h3>
             <p>{notification}</p>
             <button
@@ -307,6 +325,13 @@ const Form = ({ toggleVisibility }) => {
         <>
           <div className="overlay"></div>
           <div className="error-box">
+            <img
+              src="/foundit-logo.png"
+              width="50px"
+              height="50px"
+              alt="Found It logo"
+              style={{ borderRadius: '50%' }}
+            />
             <h3>Error</h3>
             <p>{errorMessage}</p>
             <button onClick={() => setErrorMessage('')}>Close</button>
@@ -319,6 +344,13 @@ const Form = ({ toggleVisibility }) => {
         data-size="invisible"
       ></div>
       <form className="container" onSubmit={submitHandler}>
+        <img
+          src="/foundit-logo.png"
+          width="50px"
+          height="50px"
+          alt="Found It logo"
+          style={{ borderRadius: '50%' }}
+        />
         {loading !== false && (
           <>
             <span className="loader"></span>

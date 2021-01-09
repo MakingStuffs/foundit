@@ -9,6 +9,13 @@ function App() {
     <div className="App">
       {!showForm ? (
         <Container>
+          <img
+            src="/foundit-logo.png"
+            width="75px"
+            height="75px"
+            alt="Found It logo"
+            style={{ borderRadius: '50%' }}
+          />
           <h1>Found It</h1>
           <p>
             On the morning of 7th January 2021 I was walking my dog near the
@@ -21,7 +28,7 @@ function App() {
           </p>
           <p>
             If you believe the mentioned headphones to be yours please fill in
-            the form an I will contact you.
+            the form and I will contact you.
           </p>
           <p style={{ fontWeight: 'bolder', fontStyle: 'italic' }}>
             Please note that I will only contact you if you correctly identify
@@ -32,6 +39,19 @@ function App() {
       ) : (
         <Form title="Claim AirPods" toggleVisibility={setShowForm} />
       )}
+      <footer
+        style={{
+          maxWidth: 500,
+          width: '100%',
+          textAlign: 'center',
+          color: 'white',
+          margin: 'auto',
+          fontSize: '1.2rem',
+        }}
+      >
+        Your information is not stored on any database or shared with any third
+        parties other than Google's reCaptcha bot prevention.
+      </footer>
     </div>
   )
 }
