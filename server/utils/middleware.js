@@ -24,7 +24,7 @@ const validateRecaptcha = async (req, res, next) => {
     body: `secret=${config.RECAPTCHA_SECRET}&response=${req.body.token}`,
   })
   const data = await response.json()
-  
+
   if (!data.success) {
     return res.status(401).json({
       status: 401,
@@ -34,8 +34,17 @@ const validateRecaptcha = async (req, res, next) => {
   next()
 }
 
+const requestLogger = (req, res, next) => {
+  logger.info(`Method: ${req.method}`)
+  logger.info(`Path: ${req.path}`)
+  logger.info(`Body: ${req.body}`)
+  logger.info('--------------')
+  next()
+}
+
 module.exports = {
   errorHandler,
   unknownEndpoint,
   validateRecaptcha,
+  requestLogger,
 }

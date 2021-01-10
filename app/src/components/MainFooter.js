@@ -20,7 +20,7 @@ const MainFooter = () => (
         target="_blank"
         title="Google reCaptcha terms and privacy statement"
       >
-        privacy
+        privacy.
       </a>{' '}
       <a
         href="https://github.com/MakingStuffs/foundit"

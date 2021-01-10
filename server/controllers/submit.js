@@ -32,7 +32,7 @@ submitRouter.post(
 
     const errors = validationResult(req)
 
-    if ( process.env.NODE_ENV === 'test' ) {
+    if (process.env.NODE_ENV === 'test') {
       console.log(errors)
     }
 
@@ -80,7 +80,7 @@ submitRouter.post(
 
     if (caseHasAccessories) {
       const regex = /^[a-z \'\"\.\,\-\_\)\(\/0-9]+$/gi
-        if (!regex.test(caseAccessories)) {
+      if (!regex.test(caseAccessories)) {
         return res.status(400).json({
           status: 400,
           message:
@@ -107,8 +107,8 @@ submitRouter.post(
     })
 
     const info = await transporter.sendMail({
-      from: '"Found It" <no-reply@makingstuffs.co.uk>',
-      to: 'paul@makingstuffs.co.uk',
+      from: `"Found It" <${process.env.SMTP_USER}>`,
+      to: process.env.SMTP_TO,
       subject: 'Response to FoundIt Form',
       text: `
       Name: ${name} \n
@@ -122,13 +122,11 @@ submitRouter.post(
     })
     console.log(`Message sent, ID: ${info.messageId}`)
 
-    res
-      .status(200)
-      .json({
-        message:
-          'Your submission has been received. Please note that you will only be contacted if you have correctly identified the device. Your data has not been saved on any database and will only be used to arrange returning the AirPods to their rightful owner.',
-        status: 200,
-      })
+    res.status(200).json({
+      message:
+        'Your submission has been received. Please note that you will only be contacted if you have correctly identified the device. Your data has not been saved on any database and will only be used to arrange returning the AirPods to their rightful owner.',
+      status: 200,
+    })
   }
 )
 
